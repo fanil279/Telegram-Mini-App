@@ -1,25 +1,40 @@
 {
-  "compilerOptions": {
-    "module": "nodenext",
-    "moduleResolution": "nodenext",
-    "resolvePackageJsonExports": true,
-    "esModuleInterop": true,
-    "isolatedModules": true,
-    "declaration": true,
-    "removeComments": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "allowSyntheticDefaultImports": true,
-    "target": "ES2023",
-    "sourceMap": true,
-    "outDir": "./dist",
-    "baseUrl": "./",
-    "incremental": true,
-    "skipLibCheck": true,
-    "strictNullChecks": true,
-    "forceConsistentCasingInFileNames": true,
-    "noImplicitAny": false,
-    "strictBindCallApply": false,
-    "noFallthroughCasesInSwitch": false
-  }
+    "compilerOptions": {
+        /* Module & Resolution */
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "isolatedModules": true,
+        "verbatimModuleSyntax": false,
+
+        /* Decorators */
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+
+        /* Strict TypeScript Checks */
+        "strict": true, // enables all strict options
+        "noImplicitAny": true, // no implicit any types
+        "strictNullChecks": true, // null / undefined checks
+        "strictBindCallApply": true, // stricter call / apply checks
+        "noUnusedLocals": true, // unused local variables
+        "noUnusedParameters": true, // unused parameters
+        "noFallthroughCasesInSwitch": true, // fallthrough in switch
+        "forceConsistentCasingInFileNames": true,
+        "noUncheckedIndexedAccess": true, // safer access for arrays / objects
+        "noUncheckedSideEffectImports": true, // prevent side-effect imports being ignored
+
+        /* Output */
+        "target": "ES2023",
+        "declaration": true,
+        "removeComments": true,
+        "sourceMap": true,
+        "outDir": "./dist",
+        "incremental": true,
+        "baseUrl": "./",
+
+        /* Optional / for bundlers */
+        "allowImportingTsExtensions": false
+    },
+    "include": ["src", "scripts", "vite.config.ts"]
 }
