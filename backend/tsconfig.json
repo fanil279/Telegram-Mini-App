@@ -1,5 +1,7 @@
 {
+
     "compilerOptions": {
+
         /* Module & Resolution */
         "module": "commonjs",
         "moduleResolution": "node",
@@ -25,7 +27,7 @@
         "noUncheckedSideEffectImports": true, // prevent side-effect imports being ignored
 
         /* Output */
-        "target": "ES2023",
+        "target": "es2022",
         "declaration": true,
         "removeComments": true,
         "sourceMap": true,
@@ -34,7 +36,10 @@
         "baseUrl": "./",
 
         /* Optional / for bundlers */
-        "allowImportingTsExtensions": false
+        "allowImportingTsExtensions": false,
+
     },
-    "include": ["src", "scripts", "vite.config.ts"]
+
+    "include": ["src", "test", "scripts", "vite.config.ts"],
+
 }

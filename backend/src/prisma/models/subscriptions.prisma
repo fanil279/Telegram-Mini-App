@@ -1,0 +1,27 @@
+enum SubscriptionPlanType {
+
+    BRONZE
+    SILVER
+    GOLD
+    PLATINUM
+
+}
+
+model Subscription {
+
+    id        BigInt               @id @default(autoincrement())
+
+    user      User                 @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+    userId    BigInt
+
+    plan      SubscriptionPlanType
+    startDate DateTime             @default(now())
+    endDate   DateTime
+
+    @@index([userId, endDate])
+
+
+    payments     Payment[]
+    permissions  Permission[]
+
+}

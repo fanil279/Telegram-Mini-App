@@ -1,0 +1,22 @@
+model Match {
+
+    id        BigInt   @id @default(autoincrement())
+
+    user1     User     @relation("User1Matches", fields: [user1Id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+    user1Id   BigInt
+
+    user2     User     @relation("User2Matches", fields: [user2Id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+    user2Id   BigInt
+
+    createdAt DateTime @default(now())
+
+    @@unique([user1Id, user2Id])
+
+    @@index([user1Id, user2Id])
+
+
+    messages      Message[]
+    reports       Report[]
+    notifications Notification[]
+
+}
