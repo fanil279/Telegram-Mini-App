@@ -15,17 +15,17 @@ enum StorageProvider {
 
 model MessageAttachment {
 
-    id             BigInt   @id @default(autoincrement())
+    id BigInt @id @default(autoincrement())
 
-    message        Message? @relation(fields: [messageId], references: [id], onDelete: SetNull, onUpdate: Cascade)
-    messageId      BigInt?
+    message Message? @relation(fields: [messageId], references: [id], onDelete: SetNull)
+    messageId BigInt?
 
-    type           AttachmentType
-    url            String
+    type AttachmentType
+    url String
     storageProvider StorageProvider
 
-    createdAt      DateTime @default(now())
-    updatedAt      DateTime @updatedAt
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
 
     @@index([messageId, type])
 

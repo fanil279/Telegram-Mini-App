@@ -1,7 +1,5 @@
 {
-
     "compilerOptions": {
-
         /* Module & Resolution */
         "module": "commonjs",
         "moduleResolution": "node",
@@ -31,15 +29,13 @@
         "declaration": true,
         "removeComments": true,
         "sourceMap": true,
-        "outDir": "./dist",
         "incremental": true,
         "baseUrl": "./",
+        "outDir": "./dist",
 
         /* Optional / for bundlers */
-        "allowImportingTsExtensions": false,
-
+        "allowImportingTsExtensions": false
     },
 
-    "include": ["src", "test", "scripts", "vite.config.ts"],
-
+    "include": ["src", "test", "scripts", "vite.config.ts"]
 }

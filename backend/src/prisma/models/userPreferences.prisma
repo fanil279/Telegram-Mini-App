@@ -1,0 +1,13 @@
+model UserPreference {
+
+    @@id([userId, preferenceId])
+
+    user User @relation(fields: [userId], references: [id])
+    userId BigInt
+
+    preference Preference @relation(fields: [preferenceId], references: [id])
+    preferenceId BigInt
+
+    createdAt DateTime @default(now())
+
+}

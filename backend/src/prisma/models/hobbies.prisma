@@ -1,0 +1,10 @@
+model Hobby {
+
+    id BigInt @id @default(autoincrement())
+    name String @unique @db.VarChar(32)
+
+    createdAt DateTime @default(now())
+
+    prefferedHobbies PrefferedHobby[]
+
+}

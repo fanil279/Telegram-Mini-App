@@ -1,26 +1,35 @@
 enum Features {
 
-    DAILY_LIKE_LIMIT
-    SEND_MESSAGES
-    SEE_ONLINE_USERS
-    BOOST
-    VIEW_VISITORS
-    PREMIUM_PHOTOS
-    VIDEO_CALL
-    SUPER_LIKE
-    UNDO
+    UNLIMITED_LIKES
+    SEE_WHO_IS_ONLINE
+    BOOST_PROFILE
+    VIEW_PROFILE_VISITORS
+    LIKE
+    LOVE
+    UNDO_SWIPE
+    HIDE_FROM_TG_CONTACTS
+
+}
+
+enum likeLimit {
+    
+    TWENTY
+    FIFTY
+    HUNDRED
 
 }
 
 model Permission {
 
-    id            BigInt   @id @default(autoincrement())
+    id BigInt @id @default(autoincrement())
 
-    subscription  Subscription @relation(fields: [subscriptionId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+    subscription Subscription @relation(fields: [subscriptionId], references: [id], onDelete: Cascade)
     subscriptionId BigInt
 
-    feature       Features
-    limitValue    Int?
+    feature Features
+    likeLimitValue likeLimit
+
+    @@unique([subscriptionId, feature])
 
     @@index([subscriptionId])
 
