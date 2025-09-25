@@ -1,0 +1,19 @@
+model UserAvatar {
+
+    id BigInt @id @default(autoincrement())
+
+    user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+    userId BigInt @map("user_id")
+
+    url String @db.VarChar(256)
+    isMainProfilePhoto Boolean @default(false) @map("is_main_profile_photo")
+
+    createdAt DateTime @default(now()) @map("created_at")
+
+    @@index([userId])
+
+    @@map("users_avatars")
+
+    @@schema("base")
+
+}

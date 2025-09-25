@@ -1,0 +1,15 @@
+model SubscriptionPermission {
+
+    @@id([subscriptionId, permissionId])
+
+    subscription Subscription @relation(fields: [subscriptionId], references: [id], onDelete: Cascade)
+    subscriptionId BigInt @map("subscription_id")
+
+    permission Permission @relation(fields: [permissionId], references: [id], onDelete: Cascade)
+    permissionId BigInt @map("permission_id")
+
+    @@map("subscriptions_permissions")
+
+    @@schema("base")
+
+}

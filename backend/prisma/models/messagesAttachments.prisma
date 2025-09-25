@@ -1,0 +1,41 @@
+enum AttachmentType {
+
+    IMAGE
+    VIDEO
+    AUDIO
+
+    @@map("attachment_type")
+    @@schema("base")
+
+}
+
+enum StorageProvider {
+
+    TELEGRAM
+
+    @@map("storage_provider")
+    @@schema("base")
+
+}
+
+model MessageAttachment {
+
+    id BigInt @id @default(autoincrement())
+
+    message Message? @relation(fields: [messageId], references: [id], onDelete: SetNull)
+    messageId BigInt? @map("message_id")
+
+    type AttachmentType
+    url String
+    storageProvider StorageProvider @map("storage_provider")
+
+    createdAt DateTime @default(now()) @map("created_at")
+    updatedAt DateTime @updatedAt @map("updated_at")
+
+    @@index([messageId, type])
+
+    @@map("message_attachments")
+
+    @@schema("base")
+
+}

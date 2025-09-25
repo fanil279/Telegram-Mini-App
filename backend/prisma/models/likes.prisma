@@ -1,0 +1,39 @@
+enum LikeType {
+
+    FRIEND
+    CUTE
+    SYMPATHY
+    LIKE
+    LOVE
+
+    @@map("like_type")
+    @@schema("base")
+
+}
+
+model Like {
+
+    id BigInt @id @default(autoincrement())
+
+    liker User @relation("LikesGiven", fields: [likerId], references: [id], onDelete: Cascade)
+    likerId BigInt @map("liker_id")
+
+    liked User @relation("LikesReceived", fields: [likedId], references: [id], onDelete: Cascade)
+    likedId BigInt @map("liked_id")
+
+    type LikeType
+
+    createdAt DateTime @default(now()) @map("created_at")
+
+    @@unique([likerId, likedId])
+
+    @@index([likerId, likedId, type])
+
+    @@map("likes")
+
+    @@schema("base")
+
+
+    notifications Notification? @relation("LikeNotifications")
+
+}

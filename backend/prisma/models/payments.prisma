@@ -1,0 +1,61 @@
+enum PaymentMethod {
+
+    UZCARD
+    HUMO
+    VISA
+
+    @@map("payment_method")
+    @@schema("base")
+
+}
+
+enum CurrencyType {
+
+    UZS
+    USD
+
+    @@map("currency_type")
+    @@schema("base")
+
+}
+
+
+enum PaymentStatus {
+
+    PENDING
+    COMPLETED
+    FAILED
+
+    @@map("payment_status")
+    @@schema("base")
+
+}
+
+model Payment {
+
+    id BigInt @id @default(autoincrement())
+    transactionId String? @db.VarChar(128) @unique @map("transaction_id")
+
+    user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+    userId BigInt @map("user_id")
+
+    subscription Subscription? @relation(fields: [subscriptionId], references: [id], onDelete: Cascade)
+    subscriptionId BigInt? @map("subscription_id")
+
+    method PaymentMethod
+    amount Decimal  @db.Decimal(10,2)
+    currency CurrencyType
+    status PaymentStatus
+
+    createdAt DateTime @default(now()) @map("created_at")
+
+    @@index([userId, transactionId, subscriptionId, createdAt])
+
+    @@map("payments")
+
+    @@schema("base")
+
+
+    notifications Notification? @relation("PaymentNotifications")
+
+}

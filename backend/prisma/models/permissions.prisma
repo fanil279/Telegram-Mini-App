@@ -1,0 +1,36 @@
+enum Features {
+
+    SEE_WHO_IS_ONLINE
+    BOOST_PROFILE
+    VIEW_PROFILE_VISITORS
+    LIKE
+    LOVE
+    UNDO_SWIPE
+    HIDE_FROM_TG_CONTACTS
+    AVATAR_VIDEOS
+    MULTIPLE_AVATAR_PHOTOS_VIDEOS
+    HIDE_RECEIPTS
+    REACTIONS_TEN
+    REACTIONS_THIRTY
+    REACTIONS_FIFTY
+    REACTIONS_SEVENTY
+    REACTIONS_UNLIMITED
+
+    @@map("features")
+    @@schema("base")
+
+}
+
+model Permission {
+
+    id BigInt @id @default(autoincrement())
+
+    feature Features @unique
+
+    @@map("permissions")
+   
+    @@schema("base")
+    
+    subscriptions SubscriptionPermission[]
+
+}

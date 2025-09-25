@@ -1,0 +1,17 @@
+model UserPreference {
+
+    @@id([userId, preferenceId])
+
+    user User @relation(fields: [userId], references: [id])
+    userId BigInt @map("user_id")
+
+    preference Preference @relation(fields: [preferenceId], references: [id], onDelete: Cascade)
+    preferenceId BigInt @map("preference_id")
+
+    createdAt DateTime @default(now()) @map("created_at")
+
+    @@map("user_preferences")
+
+    @@schema("base")
+
+}

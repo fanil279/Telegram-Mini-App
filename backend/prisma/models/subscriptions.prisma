@@ -1,0 +1,28 @@
+enum SubscriptionPlanType {
+
+    FREE
+    BRONZE
+    SILVER
+    GOLD
+    PLATINUM
+
+    @@map("subscription_plan_type")
+    @@schema("base")
+
+}
+
+model Subscription {
+
+    id BigInt @id @default(autoincrement())
+
+    plan SubscriptionPlanType @unique
+
+    @@map("subscriptions")
+
+    @@schema("base")
+
+
+    payments Payment[]
+    permissions SubscriptionPermission[]
+
+}

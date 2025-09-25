@@ -1,0 +1,15 @@
+model PrefferedHobby {
+
+    @@id([preferenceId, hobbyId])
+   
+    preference Preference @relation(fields: [preferenceId], references: [id], onDelete: Cascade)
+    preferenceId BigInt @map("preference_id")
+
+    hobby Hobby @relation(fields: [hobbyId], references: [id], onDelete: Cascade)
+    hobbyId BigInt @map("hobby_id")
+
+    @@map("preffered_hobbies")
+
+    @@schema("base")
+
+}
