@@ -1,5 +1,5 @@
 import { type FC } from 'react';
-import SwipeableCard from '../components/SwipeableCard';
+import SwipeableCard from '../../../components/SwipeableCard';
 import AffinaDashboard from '../components/AffinaDashboard';
 
 const Dashboard: FC = () => {

@@ -1,12 +1,22 @@
-import React, { type FC, Suspense, useState, useEffect } from 'react';
+import React, { type FC, Suspense, useState, useEffect, createContext, useContext } from 'react';
+import { useSelector } from 'react-redux';
+import type { RootState } from '../store/index';
 import Loading from '../components/Loading';
 import { Outlet } from 'react-router-dom';
 import Button from '../components/Button';
 import Badge from '../components/Badge';
 import Avatar from '../components/Avatar';
 import { Heart, Sun, Moon, Bell, Crown } from 'lucide-react';
+import { type ThemeContextType } from '../types';
 
-type SubscriptionType = 'FREE' | 'BRONZE' | 'SILVER' | 'GOLD' | 'PLATINUM';
+const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
+
+export const useTheme = () => {
+    const context = useContext(ThemeContext);
+
+    if (!context) throw new Error('useTheme must be used within ThemeProvider');
+    return context;
+};
 
 const subscriptionBadges = {
     FREE: { color: 'bg-gray-500/10 text-gray-600 border-gray-500/20', icon: null },
@@ -18,8 +28,12 @@ const subscriptionBadges = {
 
 const MainLayout: FC = () => {
     const [isDarkMode, setIsDarkMode] = useState(false);
-    const [currentSubscription, _setCurrentSubscription] = useState<SubscriptionType>('FREE');
-    const [likesRemaining, _setLikesRemaining] = useState(20);
+
+    const {
+        subscription,
+        likesRemaining,
+        notifications,
+    } = useSelector((state: RootState) => state.dashboard);
 
     useEffect(() => {
         const savedTheme = localStorage.getItem('theme');
@@ -72,7 +86,7 @@ const MainLayout: FC = () => {
                         </div>
 
                         {/* Likes left */}
-                        {currentSubscription === 'FREE' && (
+                        {subscription === 'FREE' && (
                             <div className='flex items-center justify-center gap-2 rounded-full border border-pink-500/20 bg-pink-500/10 px-3 py-1'>
                                 <Heart className='h-6 w-6 text-pink-600 max-sm:h-4 max-sm:w-4' />
                                 <span className='text-base font-medium text-pink-600 max-sm:text-sm'>
@@ -83,15 +97,12 @@ const MainLayout: FC = () => {
 
                         {/* Subscription badge */}
                         <div className='hidden items-center justify-center gap-2 md:flex'>
-                            <Badge
-                                className={`${subscriptionBadges[currentSubscription].color} border`}
-                            >
-                                {subscriptionBadges[currentSubscription].icon &&
-                                    React.createElement(
-                                        subscriptionBadges[currentSubscription].icon,
-                                        { className: 'h-4 w-4 mr-1 max-sm:h-3 max-sm:w-3' },
-                                    )}
-                                {currentSubscription}
+                            <Badge className={`${subscriptionBadges[subscription].color} border`}>
+                                {subscriptionBadges[subscription].icon &&
+                                    React.createElement(subscriptionBadges[subscription].icon, {
+                                        className: 'h-4 w-4 mr-1 max-sm:h-3 max-sm:w-3',
+                                    })}
+                                {subscription}
                             </Badge>
                         </div>
                     </div>
@@ -120,18 +131,18 @@ const MainLayout: FC = () => {
                             )}
                         </Button>
 
-                        <div className='h-10 w-0.5 bg-pink-700'></div>
+                        <div className='h-10 w-0.5 bg-pink-600'></div>
 
                         <Button variant='ghost' size='sm' className='relative'>
                             <Bell className='h-6 w-6 max-sm:h-4 max-sm:w-4' />
                             <div className='absolute -top-1 -right-1 flex h-4 w-4 animate-pulse items-center justify-center rounded-full bg-[oklch(0.75_0.12_160)] text-[11px] text-white max-sm:h-3 max-sm:w-3 max-sm:text-[9px]'>
-                                3
+                                {notifications}
                             </div>
                         </Button>
 
                         <Avatar
                             className='h-10 w-10 ring-2 ring-pink-500/20 max-sm:h-8 max-sm:w-8'
-                            src=''
+                            src='test'
                         />
                     </div>
                 </div>
@@ -139,7 +150,9 @@ const MainLayout: FC = () => {
 
             <main>
                 <Suspense fallback={<Loading />}>
-                    <Outlet />
+                    <ThemeContext.Provider value={{ isDarkMode }}>
+                        <Outlet />
+                    </ThemeContext.Provider>
                 </Suspense>
             </main>
         </div>
