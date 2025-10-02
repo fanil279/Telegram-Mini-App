@@ -16,6 +16,8 @@ model Chat {
 
     createdAt DateTime @default(now()) @map("created_at")
 
+    @@unique([user1Id, user2Id])
+
     @@index([isUnread, isTyping])
 
     @@map("chats")

@@ -50,8 +50,8 @@ model User {
     preferences UserPreference[]
     user1Chat Chat[] @relation("User1Chat")
     user2Chat Chat[] @relation("User2Chat")
-    senderTelegram Message[] @relation("SenderTelegramId")
-    receiverTelegram Message[] @relation("ReceiverTelegramId")
+    senderId Message[] @relation("SenderId")
+    receiverId Message[] @relation("ReceiverId")
     likesGiven Like[] @relation("LikesGiven")
     likesReceived Like[] @relation("LikesReceived")
     user1Matches Match[] @relation("User1Matches")

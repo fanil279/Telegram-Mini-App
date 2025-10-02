@@ -26,7 +26,7 @@ model MessageAttachment {
     messageId BigInt? @map("message_id")
 
     type AttachmentType
-    url String
+    url String @db.VarChar(2048)
     storageProvider StorageProvider @map("storage_provider")
 
     createdAt DateTime @default(now()) @map("created_at")
