@@ -4,7 +4,10 @@ export interface DashboardState {
     subscription: SubscriptionType;
     likesRemaining: number;
     notifications: number;
-    matches: number;
+    totalMatches: number;
+    newMatches: number;
+    totalChats: number;
+    activeChats: number;
 }
 
 export interface ThemeContextType {

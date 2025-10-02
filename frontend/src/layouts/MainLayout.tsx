@@ -6,7 +6,7 @@ import { Outlet } from 'react-router-dom';
 import Button from '../components/Button';
 import Badge from '../components/Badge';
 import Avatar from '../components/Avatar';
-import { Heart, Sun, Moon, Bell, Crown } from 'lucide-react';
+import { Heart, Sun, Moon, Bell, Award, Gem, Crown, Diamond } from 'lucide-react';
 import { type ThemeContextType } from '../types';
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
@@ -18,22 +18,20 @@ export const useTheme = () => {
     return context;
 };
 
-const subscriptionBadges = {
+export const subscriptionBadges = {
     FREE: { color: 'bg-gray-500/10 text-gray-600 border-gray-500/20', icon: null },
-    BRONZE: { color: 'bg-amber-600/10 text-amber-700 border-amber-600/20', icon: Crown },
-    SILVER: { color: 'bg-gray-400/10 text-gray-600 border-gray-400/20', icon: Crown },
+    BRONZE: { color: 'bg-amber-600/10 text-amber-700 border-amber-600/20', icon: Award },
+    SILVER: { color: 'bg-gray-400/10 text-gray-600 border-gray-400/20', icon: Gem },
     GOLD: { color: 'bg-yellow-500/10 text-yellow-600 border-yellow-500/20', icon: Crown },
-    PLATINUM: { color: 'bg-purple-500/10 text-purple-600 border-purple-500/20', icon: Crown },
+    PLATINUM: { color: 'bg-purple-500/10 text-purple-600 border-purple-500/20', icon: Diamond },
 };
 
 const MainLayout: FC = () => {
     const [isDarkMode, setIsDarkMode] = useState(false);
 
-    const {
-        subscription,
-        likesRemaining,
-        notifications,
-    } = useSelector((state: RootState) => state.dashboard);
+    const { subscription, likesRemaining, notifications } = useSelector(
+        (state: RootState) => state.dashboard,
+    );
 
     useEffect(() => {
         const savedTheme = localStorage.getItem('theme');
@@ -131,7 +129,7 @@ const MainLayout: FC = () => {
                             )}
                         </Button>
 
-                        <div className='h-10 w-0.5 bg-pink-600'></div>
+                        <div className='h-10 w-0.5 bg-pink-500'></div>
 
                         <Button variant='ghost' size='sm' className='relative'>
                             <Bell className='h-6 w-6 max-sm:h-4 max-sm:w-4' />

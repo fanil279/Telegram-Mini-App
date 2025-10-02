@@ -1,0 +1,25 @@
+model Chat {
+
+    id Int @id @default(autoincrement())
+
+    user1 User @relation("User1Chat", fields: [user1Id], references: [id], onDelete: Cascade)
+    user1Id BigInt @map("user1_id")
+
+    user2 User @relation("User2Chat", fields: [user2Id], references: [id], onDelete: Cascade)
+    user2Id BigInt @map("user2_id")
+
+    lastMessage String? @map("last_message")
+    isUnread Int @default(0) @map("is_unread")
+    isTyping Boolean @default(false) @map("is_typing")
+    isOnline Boolean @default(false) @map("is_online")
+    lastSeen DateTime? @map("last_seen")
+
+    createdAt DateTime @default(now()) @map("created_at")
+
+    @@index([isUnread, isTyping])
+
+    @@map("chats")
+
+    @@schema("base")
+
+}

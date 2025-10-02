@@ -1,11 +1,15 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import type { DashboardState, SubscriptionType } from '../../types';
 
+// Mock data for prototyping
 export const initialState: DashboardState = {
     subscription: 'FREE',
     likesRemaining: 20,
     notifications: 0,
-    matches: 1,
+    totalMatches: 2,
+    newMatches: 1,
+    totalChats: 3,
+    activeChats: 2,
 };
 
 const DashboardSlice = createSlice({
@@ -42,12 +46,33 @@ const DashboardSlice = createSlice({
             state.notifications = 0;
         },
 
+        // matches
         setMatches: (state, action: PayloadAction<number>) => {
-            state.matches = action.payload;
+            state.totalMatches = action.payload;
         },
 
         incrementMatches: (state) => {
-            state.matches +=1;
+            state.totalMatches += 1;
+            state.newMatches += 1;
+        },
+
+        resetMatches: (state) => {
+            state.newMatches = 0;
+        },
+
+        // chats
+        setChats: (state, action: PayloadAction<{ total: number; unread: number }>) => {
+            state.totalChats = action.payload.total;
+            state.activeChats = action.payload.unread;
+        },
+
+        newChats: (state, action: PayloadAction<{ total?: number; unread?: number }>) => {
+            state.totalChats += action.payload.total ?? 1;
+            state.activeChats += action.payload.unread ?? 1;
+        },
+
+        markChatAsRead: (state, action: PayloadAction<{ total: number; unread: number }>) => {
+            state.activeChats = state.activeChats - action.payload.unread;
         },
     },
 });
@@ -61,6 +86,10 @@ export const {
     clearNotifications,
     setMatches,
     incrementMatches,
+    resetMatches,
+    setChats,
+    newChats,
+    markChatAsRead,
 } = DashboardSlice.actions;
 
 export default DashboardSlice.reducer;

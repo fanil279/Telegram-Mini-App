@@ -33,8 +33,6 @@ model User {
     age Int
     nationality String? @db.VarChar(15)
 
-    isOnline Boolean @default(false) @map("is_online")
-    lastSeen DateTime? @map("last_seen")
     plan SubscriptionPlanType @default(FREE)
     role Role @default(USER)
 
@@ -50,6 +48,8 @@ model User {
 
     photos UserAvatar[]
     preferences UserPreference[]
+    user1Chat Chat[] @relation("User1Chat")
+    user2Chat Chat[] @relation("User2Chat")
     senderTelegram Message[] @relation("SenderTelegramId")
     receiverTelegram Message[] @relation("ReceiverTelegramId")
     likesGiven Like[] @relation("LikesGiven")
