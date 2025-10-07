@@ -1,4 +1,5 @@
 export type SubscriptionType = 'FREE' | 'BRONZE' | 'SILVER' | 'GOLD' | 'PLATINUM';
+export type ReactionType = 'FRIEND' | 'CUTE' | 'SYMPATHY' | 'LIKE' | 'LOVE';
 
 export interface DashboardState {
     subscription: SubscriptionType;

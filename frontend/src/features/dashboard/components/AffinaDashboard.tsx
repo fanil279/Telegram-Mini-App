@@ -24,6 +24,7 @@ import {
 import Avatar from '../../../components/Avatar';
 import { subscriptionBadges } from '../../../layouts/MainLayout';
 import type { SubscriptionType } from '../../../types';
+import Instructions from './Instructions';
 
 // Mock data for prototyping
 const recentChats = [
@@ -151,9 +152,6 @@ const AffinaDashboard: FC = () => {
 
             {/* Main content */}
             <div className='grid gap-6 lg:grid-cols-3'>
-                {/* Swipable cards */}
-                <section></section>
-
                 {/* Recent Chats */}
                 <section className='space-y-6'>
                     <Card className='p-6'>
@@ -276,7 +274,7 @@ const AffinaDashboard: FC = () => {
                     </Card>
                 </section>
 
-                {/* Sybscriptions */}
+                {/* Subscriptions */}
                 <section>
                     <Card className='relative overflow-hidden border-pink-500/20 bg-gradient-to-br from-pink-500/10 via-pink-500/5 to-transparent p-6'>
                         {/* Visual effect */}
@@ -363,6 +361,8 @@ const AffinaDashboard: FC = () => {
                     </Card>
                 </section>
             </div>
+
+            <Instructions />
         </div>
     );
 };

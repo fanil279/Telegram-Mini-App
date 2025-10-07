@@ -6,7 +6,7 @@ export const initialState: DashboardState = {
     subscription: 'FREE',
     likesRemaining: 20,
     notifications: 0,
-    totalMatches: 2,
+    totalMatches: 3,
     newMatches: 1,
     totalChats: 3,
     activeChats: 2,
