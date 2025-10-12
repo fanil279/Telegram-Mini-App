@@ -2,7 +2,7 @@ import { type FC } from 'react';
 import { useTheme } from '../../../layouts/MainLayout';
 import { useSelector, useDispatch } from 'react-redux';
 import { setSubscription } from '../dashboardSlice';
-import type { RootState } from '../../../store';
+import type { RootState, AppDispatch } from '../../../store';
 import Card from '../../../components/Card';
 import Badge from '../../../components/Badge';
 import Progress from './Progress';
@@ -66,7 +66,7 @@ const AffinaDashboard: FC = () => {
         (state: RootState) => state.dashboard,
     );
 
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
 
     return (
         <div className='mx-auto max-w-7xl p-6'>

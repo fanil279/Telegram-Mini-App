@@ -62,7 +62,6 @@ model User {
     reportsReceived Report[] @relation("ReportedId")
     reportsReviewed Report[] @relation("ReviewedBy")
     notifications Notification[]
-    tgChannelSubscribers TgChannelSubscriber[]
     payments Payment[]
 
 }
