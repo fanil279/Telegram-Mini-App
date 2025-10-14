@@ -1,4 +1,5 @@
 import 'dotenv/config';
+import './bot/index';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 

@@ -1,11 +1,11 @@
-import { ObjectType, Field, ID } from '@nestjs/graphql';
+import { ObjectType, Field, Int } from '@nestjs/graphql';
 import { Gender, Role } from './enums';
 import { UserAvatar } from './userAvatars.model';
 import { UserPreference } from './userPreferences.model';
 
 @ObjectType()
 export class User {
-    @Field(() => ID)
+    @Field(() => Int)
     id!: number;
 
     @Field()
