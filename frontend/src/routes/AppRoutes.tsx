@@ -9,7 +9,14 @@ const AppRoutes = () => {
         <Router>
             <Suspense fallback={<Loading />}>
                 <Routes>
-                    <Route path='/' element={<ProtectedRoute>{DashboardRoutes}</ProtectedRoute>} />
+                    <Route
+                        path='/'
+                        element={
+                            <ProtectedRoute>
+                                <DashboardRoutes />
+                            </ProtectedRoute>
+                        }
+                    />
                 </Routes>
             </Suspense>
         </Router>

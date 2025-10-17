@@ -40,7 +40,6 @@ export class User {
 
     @Field()
     updatedAt!: Date;
-    
 
     @Field(() => [UserAvatar], { nullable: 'itemsAndList' })
     photos?: UserAvatar[];

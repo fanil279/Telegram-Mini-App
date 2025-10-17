@@ -16,6 +16,7 @@ interface TelegramWebAppInitDataUnsafe {
 interface TelegramWebApp {
     initData: string;
     initDataUnsafe?: TelegramWebAppInitDataUnsafe;
+    ready: () => void;
 }
 
 interface Window {

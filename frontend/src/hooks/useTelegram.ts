@@ -1,46 +1,42 @@
 import { useEffect, useState } from 'react';
-import { getTelegramInitData, getTelegramUser } from '../services/telegram';
 import authLogin from '../features/auth/authApi';
-import type { LoginUser } from '../types/auth';
+import type { LoginUser } from '../types';
 
 function useAuth() {
     const [user, setUser] = useState<LoginUser | null>(null);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
-        async function Login() {
-            try {
-                setLoading(true);
-
-                const token = localStorage.getItem('token');
-
-                if (token) {
-                    const tgUser = getTelegramUser();
-                    if (tgUser) {
-                        setUser({
-                            telegramId: tgUser.id,
-                        });
-                    }
-                    return;
-                }
-
-                const initData = getTelegramInitData();
-                const { user } = await authLogin(initData);
-
-                setUser({
-                    telegramId: user.telegramId,
-                });
-            } catch (err) {
-                console.error('Telegram login validation failed', err);
-            } finally {
-                setLoading(false);
+        const waitForTelegram = () => {
+            if (!window.Telegram?.WebApp) {
+                setTimeout(waitForTelegram, 50);
+                return;
             }
-        }
 
-        Login();
+            const webApp = window.Telegram.WebApp;
+            webApp.ready();
+
+            (async () => {
+                try {
+                    const initData = webApp.initData;
+                    if (!initData) throw new Error('Telegram initData missing');
+
+                    const loginResponse = await authLogin(initData);
+                    setUser({ telegramId: loginResponse.telegramId });
+                } catch (err: any) {
+                    console.error('Telegram login failed', err);
+                    setError(err.message || 'Login failed');
+                } finally {
+                    setLoading(false);
+                }
+            })();
+        };
+
+        waitForTelegram();
     }, []);
 
-    return { user, loading };
+    return { user, loading, error };
 }
 
 export default useAuth;

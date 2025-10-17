@@ -1,11 +1,8 @@
 export interface LoginResponse {
     token: string;
-    user: {
-        telegramId: number;
-        fullname: string;
-    };
+    telegramId: string;
 }
 
 export interface LoginUser {
-    telegramId: number;
+    telegramId: string;
 }

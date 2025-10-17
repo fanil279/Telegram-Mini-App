@@ -4,9 +4,10 @@ import { BotService } from './conversation';
 import { AuthService } from 'src/auth/auth.service';
 import { PrismaService } from '../../prisma/prisma.service';
 import { messages } from '../i18n/messages';
+import { JwtService } from '@nestjs/jwt';
 
 const prismaService = new PrismaService();
-const authService = new AuthService(prismaService);
+const authService = new AuthService(prismaService, new JwtService());
 const botService = new BotService(authService);
 
 bot.use(conversations());
