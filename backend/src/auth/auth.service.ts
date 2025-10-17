@@ -25,29 +25,17 @@ export class AuthService {
     async loginUser(data: LoginUserData) {
         const telegramIdBigInt = BigInt(data.telegramId);
 
-        let user = await this.prisma.user.findUnique({
+        const user = await this.prisma.user.findUnique({
             where: { telegramId: telegramIdBigInt },
         });
 
-        if (!user) {
-            user = await this.prisma.user.create({
-                data: {
-                    telegramId: telegramIdBigInt,
-                    fullname: 'New User',
-                    age: 0,
-                    gender: Gender.MALE,
-                    city: 'Unknown',
-                },
-            });
-        }
-
         const token = this.jwtService.sign({
-            telegramId: user.telegramId.toString(),
+            telegramId: user!.telegramId.toString(),
         });
 
         return {
             token,
-            telegramId: user.telegramId.toString(),
+            telegramId: user!.telegramId.toString(),
         };
     }
 }

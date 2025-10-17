@@ -1,12 +1,12 @@
 import type { JSX } from 'react';
 import useAuth from '../hooks/useTelegram';
+import Loading from '../components/Loading';
 
 export const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
-    const { user, loading, error } = useAuth();
+    const { telegramId, loading } = useAuth();
 
-    if (loading) return <div>Loading Telegram Mini App...</div>;
-    if (error) return <div>Error: {error}</div>;
-    if (!user) return <div>Please open this Mini App inside Telegram.</div>;
+    if (loading) return <Loading />;
+    if (!telegramId) return <div>Please open this Mini App inside Telegram.</div>;
 
     return <>{children}</>;
 };

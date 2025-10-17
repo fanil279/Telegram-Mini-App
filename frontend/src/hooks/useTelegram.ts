@@ -1,16 +1,20 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import authLogin from '../features/auth/authApi';
-import type { LoginUser } from '../types';
+import { useDispatch, useSelector } from 'react-redux';
+import type { AppDispatch, RootState } from '../store';
+import { login, setError } from '../features/auth/authSlice';
 
 function useAuth() {
-    const [user, setUser] = useState<LoginUser | null>(null);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
+    const dispatch = useDispatch<AppDispatch>();
+
+    const { telegramId, token, loading, error } = useSelector((state: RootState) => state.auth);
 
     useEffect(() => {
-        const waitForTelegram = () => {
+        let timeout: number;
+
+        const waitForTelegram = (): void => {
             if (!window.Telegram?.WebApp) {
-                setTimeout(waitForTelegram, 50);
+                timeout = window.setTimeout(waitForTelegram, 50);
                 return;
             }
 
@@ -23,20 +27,27 @@ function useAuth() {
                     if (!initData) throw new Error('Telegram initData missing');
 
                     const loginResponse = await authLogin(initData);
-                    setUser({ telegramId: loginResponse.telegramId });
+                    dispatch(
+                        login({
+                            telegramId: loginResponse.telegramId,
+                            token: loginResponse.token,
+                            loading: false,
+                            error: null
+                        }),
+                    );
                 } catch (err: any) {
                     console.error('Telegram login failed', err);
-                    setError(err.message || 'Login failed');
-                } finally {
-                    setLoading(false);
+                    dispatch(setError(err.message))
                 }
             })();
         };
 
         waitForTelegram();
-    }, []);
 
-    return { user, loading, error };
+        return () => clearTimeout(timeout);
+    }, [dispatch]);
+
+    return { telegramId, token, loading, error };
 }
 
 export default useAuth;
