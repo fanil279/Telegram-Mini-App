@@ -51,9 +51,19 @@ export class BotService {
         }
 
         // Ask age
+        let age: number;
+        const regex = /^\d+$/;
         await ctx.reply(t.askAge);
         const { message: ageMsg } = await conversation.waitFor('message:text');
-        const age = parseInt(ageMsg.text);
+        if (regex.test(ageMsg.text)) {
+            age = parseInt(ageMsg.text);
+        } else {
+            do {
+                await ctx.reply(t.errorAge);
+                const { message: ageMsg } = await conversation.waitFor('message:text');
+                age = parseInt(ageMsg.text);
+            } while (!regex.test(String(age)));
+        }
 
         // Ask gender
         let gender: 'Male' | 'Female' = 'Male';
@@ -67,9 +77,26 @@ export class BotService {
         else if (genderQuery.data === 'gender_female') gender = 'Female';
 
         // Ask city
-        await ctx.reply(t.askCity);
-        const { message: cityMsg } = await conversation.waitFor('message:text');
-        const city = cityMsg.text;
+        await ctx.reply(t.askCity, {
+            reply_markup: new InlineKeyboard()
+                .text(t.regions[0]!, 'tashkent')
+                .text(t.regions[1]!, 'bukhara')
+                .text(t.regions[2]!, 'fergana')
+                .row()
+                .text(t.regions[3]!, 'jizzakh')
+                .text(t.regions[4]!, 'namangan')
+                .text(t.regions[5]!, 'navoiy')
+                .row()
+                .text(t.regions[6]!, 'qashqadaryo')
+                .text(t.regions[7]!, 'samarqand')
+                .text(t.regions[8]!, 'sirdaryo')
+                .row()
+                .text(t.regions[9]!, 'surxondaryo')
+                .text(t.regions[10]!, 'tashkent')
+                .text(t.regions[11]!, 'khorezm')
+        });
+        const { callbackQuery: cityQuery } = await conversation.waitFor('callback_query:data');
+        const city = cityQuery.data;
 
         // Save to user profile
         await this.authService.registerUser({

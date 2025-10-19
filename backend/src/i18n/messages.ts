@@ -19,6 +19,22 @@ export const messages = {
         askCity: 'Из какого ты города?',
 
         errorUser: 'Ошибка: не удалось получить информацию о пользователе Telegram.',
+        errorAge: 'Возвраст должен быть цифрой.',
+
+        regions: [
+            'Андижан',
+            'Бухара',
+            'Фергана',
+            'Джизак',
+            'Наманган',
+            'Навои',
+            'Кашкадарья',
+            'Самарканд',
+            'Сырдарья',
+            'Сурхандарья',
+            'Ташкент',
+            'Хорезм',
+        ],
     },
 
     en: {
@@ -40,6 +56,22 @@ export const messages = {
         askCity: 'What city are you from?',
 
         errorUser: 'Error: Unable to retrieve your Telegram user information.',
+        errorAge: 'Age should be a number.',
+
+        regions: [
+            'Andijan',
+            'Bukhara',
+            'Fergana',
+            'Jizzakh',
+            'Namangan',
+            'Navoiy',
+            'Qashqadaryo',
+            'Samarqand',
+            'Sirdaryo',
+            'Surxondaryo',
+            'Tashkent',
+            'Khorezm',
+        ],
     },
 
     uz: {
@@ -61,5 +93,21 @@ export const messages = {
         askCity: 'Qaysi shahardansiz?',
 
         errorUser: 'Xato: Telegram foydalanuvchi maʼlumotlarini olish imkoni bo‘lmadi.',
+        errorAge: 'Yosh raqam bo‘lishi kerak.',
+
+        regions: [
+            'Andijon',
+            'Buxoro',
+            'Farg‘ona',
+            'Jizzax',
+            'Namangan',
+            'Navoiy',
+            'Qashqadaryo',
+            'Samarqand',
+            'Sirdaryo',
+            'Surxondaryo',
+            'Toshkent',
+            'Xorazm',
+        ],
     },
 };
