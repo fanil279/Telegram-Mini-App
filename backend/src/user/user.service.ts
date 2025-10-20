@@ -14,10 +14,13 @@ export class UserService {
     }
 
     getUserPhotos(userId: number) {
-        return this.prisma.userAvatar.findMany({ where: { id: userId } } );
+        return this.prisma.userAvatar.findMany({
+            where: { userId: userId },
+            select: { id: true, url: true, isMainProfilePhoto: true },
+        });
     }
 
     getUserPreferences(userId: number) {
-        return this.prisma.userPreference.findMany({ where: { userId: userId } } );
+        return this.prisma.userPreference.findMany({ where: { userId: userId } });
     }
 }

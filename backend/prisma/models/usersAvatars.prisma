@@ -6,7 +6,7 @@ model UserAvatar {
     userId BigInt @map("user_id")
 
     url String @db.VarChar(256)
-    isMainProfilePhoto Boolean @default(false) @map("is_main_profile_photo")
+    isMainProfilePhoto Boolean @default(true) @map("is_main_profile_photo")
 
     createdAt DateTime @default(now()) @map("created_at")
 

@@ -11,12 +11,15 @@ export const messages = {
         useTelegramName: 'Использовать имя Telegram',
         typeDifferentName: 'Ввести другое имя',
         askCustomName: 'Пожалуйста, напиши своё имя:',
+        openMiniApp: 'Готово! Откройте свой профиль в мини‑приложении:',
 
         askAge: 'Сколько тебе лет?',
         askGender: 'Какой у тебя пол?',
         genderMale: 'Мужчина',
         genderFemale: 'Женщина',
         askCity: 'Из какого ты города?',
+        askPhoto:
+            'Загрузите, пожалуйста, одну фотографию. Вы сможете изменить её позже, включая всю другую информацию, которую вы предоставили ранее.',
 
         errorUser: 'Ошибка: не удалось получить информацию о пользователе Telegram.',
         errorAge: 'Возвраст должен быть цифрой.',
@@ -48,12 +51,15 @@ export const messages = {
         useTelegramName: 'Use Telegram name',
         typeDifferentName: 'Type a different name',
         askCustomName: 'Please type your preferred name:',
+        openMiniApp: 'All done! Open your profile in the mini app:',
 
         askAge: 'How old are you?',
         askGender: 'What is your gender?',
         genderMale: 'Man',
         genderFemale: 'Woman',
         askCity: 'What city are you from?',
+        askPhoto:
+            'Uplaod one photo please. You will be able to change it later, including all the other information you provided earlier.',
 
         errorUser: 'Error: Unable to retrieve your Telegram user information.',
         errorAge: 'Age should be a number.',
@@ -85,12 +91,15 @@ export const messages = {
         useTelegramName: 'Telegram ismini ishlatish',
         typeDifferentName: 'Boshqa ism yozish',
         askCustomName: 'Iltimos, ismingizni yozing:',
+        openMiniApp: 'Hammasi tayyor! Mini ilovada profilingizni oching:',
 
         askAge: 'Yoshingiz nechida?',
         askGender: 'Jinsingiz qanday?',
         genderMale: 'Erkak',
         genderFemale: 'Ayol',
         askCity: 'Qaysi shahardansiz?',
+        askPhoto:
+            'Iltimos, bitta rasm yuklang. Keyinchalik uni, shuningdek ilgari taqdim etgan barcha ma’lumotlaringizni o‘zgartirishingiz mumkin bo‘ladi.',
 
         errorUser: 'Xato: Telegram foydalanuvchi maʼlumotlarini olish imkoni bo‘lmadi.',
         errorAge: 'Yosh raqam bo‘lishi kerak.',

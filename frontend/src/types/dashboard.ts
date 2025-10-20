@@ -14,3 +14,11 @@ export interface DashboardState {
 export interface ThemeContextType {
     isDarkMode: boolean;
 }
+
+export interface IGetUserPhotoResponse {
+    getUserPhotos: Array<{
+        id: number;
+        url: string;
+        isMainProfilePhoto: boolean;
+    }>;
+}

@@ -19,4 +19,7 @@ export class RegisterUserData {
 
     @Field({ nullable: true })
     username?: string;
+
+    @Field()
+    url!: string;
 }

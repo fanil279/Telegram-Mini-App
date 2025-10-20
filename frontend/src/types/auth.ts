@@ -3,10 +3,6 @@ export interface LoginResponse {
     telegramId: string;
 }
 
-export interface LoginUser {
-    telegramId: string;
-}
-
 export interface AuthState {
     telegramId: string | null;
     token: string | null;

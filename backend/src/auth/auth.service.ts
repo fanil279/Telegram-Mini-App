@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service';
-import { RegisterUserData } from './dto/registerUserData';
+import { RegisterUserData } from './dto/registerInputData';
 import { LoginUserData } from './dto/loginInputData';
 import { Gender } from 'generated/prisma';
 import { JwtService } from '@nestjs/jwt';
@@ -15,11 +15,35 @@ export class AuthService {
     async registerUser(data: RegisterUserData) {
         const genderEnum = data.gender.toUpperCase() === 'MALE' ? Gender.MALE : Gender.FEMALE;
 
-        return this.prisma.user.upsert({
-            update: { ...data, gender: genderEnum },
-            create: { ...data, gender: genderEnum },
+        const user = this.prisma.user.upsert({
+            update: {
+                telegramId: data.telegramId,
+                fullname: data.fullname,
+                age: data.age,
+                gender: genderEnum,
+                username: data.username,
+            },
+            create: {
+                telegramId: data.telegramId,
+                fullname: data.fullname,
+                age: data.age,
+                city: data.city,
+                gender: genderEnum,
+                username: data.username,
+            },
             where: { telegramId: data.telegramId },
         });
+
+        const userId = (await user).id;
+
+        const userPhoto = this.prisma.userAvatar.create({
+            data: {
+                url: data.url,
+                user: { connect: { id: userId } },
+            },
+        });
+
+        return await Promise.all([user, userPhoto]);
     }
 
     async loginUser(data: LoginUserData) {

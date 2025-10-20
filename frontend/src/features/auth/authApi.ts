@@ -1,5 +1,5 @@
-import { gql } from 'graphql-request';
 import client from '../../config/graphQl';
+import { gql } from 'graphql-request';
 import type { LoginResponse } from '../../types';
 
 const authLogin = async (initData: string): Promise<LoginResponse> => {

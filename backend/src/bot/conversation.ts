@@ -98,6 +98,12 @@ export class BotService {
         const { callbackQuery: cityQuery } = await conversation.waitFor('callback_query:data');
         const city = cityQuery.data;
 
+        // Ask main photo
+        await ctx.reply(t.askPhoto);
+        const { msg } = await conversation.waitFor('message:photo');
+        const highResPhoto = msg.photo.at(-1);
+        const photoId = highResPhoto!.file_id;
+
         // Save to user profile
         await this.authService.registerUser({
             telegramId: tgUser.id,
@@ -106,10 +112,11 @@ export class BotService {
             gender: gender,
             city: city,
             username: tgUser.username,
+            url: photoId,
         });
 
         // Call mini app
-        await ctx.reply('All done! Open your profile in the mini app:', {
+        await ctx.reply(t.openMiniApp, {
             reply_markup: new InlineKeyboard().webApp('Open Affina', process.env.FRONTEND_URL!),
         });
     }
