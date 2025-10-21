@@ -70,7 +70,7 @@ export class AuthService {
             token,
             id: user.id.toString(),
             telegramId: user.telegramId.toString(),
-            avatarUrl: user.photos[0]?.url,
+            avatarUrl: user.photos[0]?.url ?? '',
         };
     }
 }
