@@ -93,7 +93,7 @@ export class BotService {
                 .row()
                 .text(t.regions[9]!, 'surxondaryo')
                 .text(t.regions[10]!, 'tashkent')
-                .text(t.regions[11]!, 'khorezm')
+                .text(t.regions[11]!, 'khorezm'),
         });
         const { callbackQuery: cityQuery } = await conversation.waitFor('callback_query:data');
         const city = cityQuery.data;
@@ -104,6 +104,9 @@ export class BotService {
         const highResPhoto = msg.photo.at(-1);
         const photoId = highResPhoto!.file_id;
 
+        const file = await ctx.api.getFile(photoId);
+        const photoUrl = `https://api.telegram.org/file/bot${process.env.BOT_TOKEN}/${file.file_path}`;
+
         // Save to user profile
         await this.authService.registerUser({
             telegramId: tgUser.id,
@@ -112,7 +115,7 @@ export class BotService {
             gender: gender,
             city: city,
             username: tgUser.username,
-            url: photoId,
+            url: photoUrl,
         });
 
         // Call mini app

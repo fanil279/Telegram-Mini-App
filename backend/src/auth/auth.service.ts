@@ -51,15 +51,26 @@ export class AuthService {
 
         const user = await this.prisma.user.findUnique({
             where: { telegramId: telegramIdBigInt },
+            include: {
+                photos: {
+                    where: { isMainProfilePhoto: true },
+                    select: { url: true },
+                },
+            },
         });
 
+        if (!user) throw new Error('User not found');
+
         const token = this.jwtService.sign({
-            telegramId: user!.telegramId.toString(),
+            telegramId: user.telegramId.toString(),
+            userId: user.id.toString(),
         });
 
         return {
             token,
-            telegramId: user!.telegramId.toString(),
+            id: user.id.toString(),
+            telegramId: user.telegramId.toString(),
+            avatarUrl: user.photos[0]?.url,
         };
     }
 }

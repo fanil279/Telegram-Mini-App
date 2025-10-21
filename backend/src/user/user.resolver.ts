@@ -1,7 +1,7 @@
 import { Resolver, Query, Args, ResolveField, Parent } from '@nestjs/graphql';
 import { UserService } from './user.service';
 import { User } from './models/user.model';
-import { userAvatarsResponseData } from './dto/userAvatarsResponseData';
+import { UserAvatarsResponseData } from './dto/userAvatarsResponseData';
 import { UserPreference } from './models/userPreferences.model';
 
 @Resolver(() => User)
@@ -13,7 +13,7 @@ export class UserResolver {
         return this.userService.findAll();
     }
 
-    @ResolveField(() => [userAvatarsResponseData], { nullable: 'itemsAndList' })
+    @ResolveField(() => [UserAvatarsResponseData], { nullable: 'itemsAndList' })
     getUserPhotos(@Parent() user: User) {
         return this.userService.getUserPhotos(user.id);
     }

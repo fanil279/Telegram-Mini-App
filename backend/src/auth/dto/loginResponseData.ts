@@ -6,5 +6,11 @@ export class AuthResponseData {
     token!: string;
 
     @Field()
+    id!: string;
+
+    @Field()
     telegramId!: string;
+
+    @Field()
+    avatarUrl!: string;
 }

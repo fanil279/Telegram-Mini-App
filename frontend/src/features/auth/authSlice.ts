@@ -2,8 +2,10 @@ import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import type { AuthState } from '../../types';
 
 export const initialState: AuthState = {
+    id: null,
     telegramId: null,
     token: null,
+    avatarUrl: null,
     loading: true,
     error: null,
 };
@@ -14,8 +16,10 @@ const AuthSlice = createSlice({
 
     reducers: {
         login: (state, action: PayloadAction<AuthState>) => {
+            state.id = action.payload.id;
             state.telegramId = action.payload.telegramId;
             state.token = action.payload.token;
+            state.avatarUrl = action.payload.avatarUrl;
             state.loading = false;
             state.error = null;
         },

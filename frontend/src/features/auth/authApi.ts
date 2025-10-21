@@ -13,7 +13,9 @@ const authLogin = async (initData: string): Promise<LoginResponse> => {
         mutation AppLogin($data: LoginUserData!) {
             LoginUser(data: $data) {
                 token
+                id
                 telegramId
+                avatarUrl
             }
         }
     `;

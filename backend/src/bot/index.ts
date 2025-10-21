@@ -27,7 +27,7 @@ bot.command('start', async (ctx) => {
     await ctx.conversation.enter('registerUser');
 });
 
-bot.start({ drop_pending_updates: true })
+bot.start({ drop_pending_updates: false })
     .then(() => console.log('Bot started'))
     .catch((err) => {
         console.error('Failed to start bot:', err);

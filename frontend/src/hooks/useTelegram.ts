@@ -29,15 +29,17 @@ function useAuth() {
                     const loginResponse = await authLogin(initData);
                     dispatch(
                         login({
-                            telegramId: loginResponse.telegramId,
+                            id: parseInt(loginResponse.id),
+                            telegramId: parseInt(loginResponse.telegramId),
                             token: loginResponse.token,
+                            avatarUrl: loginResponse.avatarUrl,
                             loading: false,
-                            error: null
+                            error: null,
                         }),
                     );
                 } catch (err: any) {
                     console.error('Telegram login failed', err);
-                    dispatch(setError(err.message))
+                    dispatch(setError(err.message));
                 }
             })();
         };

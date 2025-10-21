@@ -1,8 +1,8 @@
 import React, { type FC, Suspense, useState, useEffect, createContext, useContext } from 'react';
 import { useSelector } from 'react-redux';
 import type { RootState } from '../store/index';
-import Loading from '../components/Loading';
 import { Outlet } from 'react-router-dom';
+import Loading from '../components/Loading';
 import Button from '../components/Button';
 import Badge from '../components/Badge';
 import Avatar from '../components/Avatar';
@@ -28,10 +28,10 @@ export const subscriptionBadges = {
 
 const MainLayout: FC = () => {
     const [isDarkMode, setIsDarkMode] = useState(false);
-
     const { subscription, likesRemaining, notifications } = useSelector(
         (state: RootState) => state.dashboard,
     );
+    const avatarUrl = useSelector((state: RootState) => state.auth.avatarUrl);
 
     useEffect(() => {
         const savedTheme = localStorage.getItem('theme');
@@ -138,10 +138,12 @@ const MainLayout: FC = () => {
                             </div>
                         </Button>
 
-                        <Avatar
-                            className='h-10 w-10 ring-2 ring-pink-500/20 max-sm:h-8 max-sm:w-8'
-                            src='test'
-                        />
+                        {avatarUrl && (
+                            <Avatar
+                                className='h-10 w-10 ring-2 ring-pink-500/20 max-sm:h-8 max-sm:w-8'
+                                src={avatarUrl}
+                            />
+                        )}
                     </div>
                 </div>
             </header>
