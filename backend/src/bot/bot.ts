@@ -14,7 +14,7 @@ import { JwtService } from '@nestjs/jwt';
 
 dotenv.config();
 
-type RegistrationStep = 'language' | 'name' | 'age' | 'gender' | 'city' | 'photo';
+type RegistrationStep = 'language' | 'name' | 'age' | 'gender' | 'city' | 'photo' | 'done';
 
 interface MySession {
     registration?: Partial<{
@@ -24,7 +24,6 @@ interface MySession {
         gender: string;
         city: string;
         mainPhoto: string;
-        waitingFor: string | null;
         step: RegistrationStep;
     }>;
 }
@@ -51,8 +50,4 @@ bot.use(
 
 bot.use(conversations());
 
-bot.use(
-    createConversation<MyContext, MyContext>(async (conversation, ctx) => {
-        await botService.registerUser(conversation, ctx);
-    }, 'registerUser'),
-);
+bot.use(createConversation(botService.registerUser.bind(botService), 'registerUser'));
