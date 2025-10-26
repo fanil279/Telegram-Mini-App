@@ -20,7 +20,7 @@ export const messages = {
         askCity: 'Из какого ты города?',
         askPhoto:
             'Загрузите, пожалуйста, одну фотографию. Вы сможете изменить её позже, включая всю другую информацию, которую вы предоставили ранее.',
-
+        isReg: 'У вас уже есть аккаунт. Пожалуйста, откройте Affina.',
         errorUser: 'Ошибка: не удалось получить информацию о пользователе Telegram.',
         errorAge: 'Возвраст должен быть цифрой.',
 
@@ -60,7 +60,7 @@ export const messages = {
         askCity: 'What city are you from?',
         askPhoto:
             'Uplaod one photo please. You will be able to change it later, including all the other information you provided earlier.',
-
+        isReg: 'You have an account. Please, open Affina.',
         errorUser: 'Error: Unable to retrieve your Telegram user information.',
         errorAge: 'Age should be a number.',
 
@@ -100,7 +100,7 @@ export const messages = {
         askCity: 'Qaysi shahardansiz?',
         askPhoto:
             'Iltimos, bitta rasm yuklang. Keyinchalik uni, shuningdek ilgari taqdim etgan barcha ma’lumotlaringizni o‘zgartirishingiz mumkin bo‘ladi.',
-
+        isReg: 'Sizda allaqachon akkaunt bor. Iltimos, Affina ilovasini oching.',
         errorUser: 'Xato: Telegram foydalanuvchi maʼlumotlarini olish imkoni bo‘lmadi.',
         errorAge: 'Yosh raqam bo‘lishi kerak.',
 

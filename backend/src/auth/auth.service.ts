@@ -15,15 +15,8 @@ export class AuthService {
     async registerUser(data: RegisterUserData) {
         const genderEnum = data.gender.toUpperCase() === 'MALE' ? Gender.MALE : Gender.FEMALE;
 
-        const user = this.prisma.user.upsert({
-            update: {
-                telegramId: data.telegramId,
-                fullname: data.fullname,
-                age: data.age,
-                gender: genderEnum,
-                username: data.username,
-            },
-            create: {
+        const user = this.prisma.user.create({
+            data: {
                 telegramId: data.telegramId,
                 fullname: data.fullname,
                 age: data.age,
@@ -31,7 +24,6 @@ export class AuthService {
                 gender: genderEnum,
                 username: data.username,
             },
-            where: { telegramId: data.telegramId },
         });
 
         const userId = (await user).id;
